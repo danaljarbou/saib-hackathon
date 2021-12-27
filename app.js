@@ -2,11 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const pool = require('./db');
+const path = require('path');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));           
+app.use(bodyParser.urlencoded({ extended: false }));   
 
+//app.use(express.static('./public'));
+//app.use(express.static(`${__dirname}/public`));
 
 app.use(cors());
 
@@ -14,7 +17,8 @@ app.use(cors());
 
 // Home Page 
 app.get("/", (req, res) => {
-  res.send("This is Home Page");
+  
+  res.sendFile(path.join(__dirname, 'public/homePage.html'));
 });
 
 // Add problem page 
@@ -24,7 +28,7 @@ app.get("/problems/newProblem", (req, res) => {
 
 // Login Page 
 app.get("/login", (req, res) => {
-  res.send("please LOG IN");
+  res.sendFile(path.join(__dirname, 'public/login.html'));
 });
 
 // Problems Admin : display the admin problems which he added 
