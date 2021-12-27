@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Image and text -->
+    <nav class="navbar navbar-light  nav justify-content-center " style="background-color: #fee202;">
+        
+          <img src=".\Images\logo.png" height="50" style="align-content: center;">
+          <span class="navbar-text" style="align-content: center; color: #000; margin-left: 1%;" >
+            Exact Solutions
+          </span>
+        
+      </nav>
+
+</head>
+<body>
+
+    <div>
+         <h1 id="prob_title">problem Title</h1>
+        </div>
+    <div>
+        <h6>display all the solutions for the problem</h6>
+    </div>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <button>name - solution name</button> 
+        </div>
+
+        <div id="formContent">
+            <button>name - solution name</button> 
+            </div>
+
+            <div id="formContent">
+                <button>name - solution name</button> 
+                </div>
+
+                <div id="formContent">
+                    <button>name - solution name</button>  
+                    </div>
+
+      </div>
+
+</body>
+</html>
+
+<style>
+    
+    html {
+  background-color: #fdfdfd;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  height: 50vh;
+}
+
+a {
+  color: #ecdb55;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+
+h1 {
+  text-align: center;
+  align-content: center;
+  font-size: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 40px 8px 10px 8px; 
+  color: #000000;
+}
+
+
+h6 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  margin: 10px 8px 40px 30px; 
+  color: #cccccc;
+}
+
+
+
+/* STRUCTURE */
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 10px;
+ 
+}
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  width: 50%;
+  max-width: 1000px;
+  position: relative;
+  border-color: black;
+ border-width: thin;
+margin-top: 2%;
+  text-align: center;
+  background-color: rgb(224, 223, 223);
+}
+
+
+button{
+border-width: 0vh;
+width: 100%;
+-webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: rgb(224, 223, 223);
+
+}
+
+
+/* TABS */
+
+h2.inactive {
+  color: #cccccc;
+}
+
+h2.active {
+  color: #0d0d0d;
+  border-bottom: 2px solid #fee202;
+}
+
+
+
+/* FORM TYPOGRAPHY*/
+
+input[type=button], input[type=submit], input[type=reset]  {
+  background-color: #fee202;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(233, 214, 45, 0.4);
+  box-shadow: 0 10px 30px 0 rgba(233, 214, 45, 0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  background-color: #fee202;
+}
+
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+input[type=text] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 80%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #fee202;
+}
+
+input[type=text]:placeholder {
+  color: #cccccc;
+}
+
+
+
+/* ANIMATIONS */
+
+
+
+.underlineHover:hover {
+  color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+  width: 100%;
+}
+
+
+
+/* OTHERS */
+
+*:focus {
+    outline: none;
+} 
+
+#icon {
+  width:60%;
+}
+
+</style>
