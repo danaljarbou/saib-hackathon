@@ -4,13 +4,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Corporate 1</title>
+    <title>Scoring page</title>
     
-    <link href="\CSS\bootstrap.min.css" rel="stylesheet">
-    <link href="css/customse.css" rel="stylesheet">
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="../CSS/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="\CSS\custome.css" rel="stylesheet">
     
     
     <!--[if lt IE 9]>
@@ -35,7 +33,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   <li>
-                    <a href="#"><img alt="SaibLogo"  height="45" src="./logo.png" id="logofpin"></a>
+                    <a href="#"><img alt="SaibLogo"  height="45" src="public\logo.png" id="logofpin"></a>
                   </li>
                 </ul>
               </div>
@@ -56,7 +54,7 @@
             
             <div class="container-fostrap">
                 <div>
-                    <img src="public\logo.png" class="fostrap-logo"/>
+                    <img src="./logo.png" class="fostrap-logo"/>
                     <h5 class="heading">
                        we need to get data 
                     </h5>
@@ -101,25 +99,23 @@
                 </div>
                 <hr size="8" width="90%" color="yellow">  
                
-                <button id="submitForm" class="app-form-button">Relevant</button>
-                <button id="submitForms" class="app-form-button"> Not Relevant</button>
+<form action="/action_page.php">
+    <label id="Feaibilty" for="vol">Feaibilty scoring (between 1 and 4):</label>
+    <input type="range" id="vol" name="vol" min="1" max="4">
+<br/>
+<br/>
+    <label id="Costing" for="vol">Cost scoring (between 1 and 4):</label>
+    <input type="range" id="vol" name="vol" min="1" max="4">
+    <br/>
+    <input type="submit">
+  </form>
+ 
                 
-                
-                <script>
-                  $("#submitForm").click(function() {
-                     alert("The score has been submitted");
-                  });
-               </script>
-                
-                <script>
-                  $("#submitForms").click(function() {
-                     alert("The score has been submitted");
-                  });
-               </script>
     </body>
 
     <style>
-     body {
+    
+    body {
 	padding-top: 0px;
 	color: #959595;
     
@@ -179,6 +175,8 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0;
     position: absolute; bottom: 40px; right: 40px; 
   }
-  
+    
+    
+
 
     </style>
