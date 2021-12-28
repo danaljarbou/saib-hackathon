@@ -26,46 +26,47 @@
          
           <h6>by adding a problem, it will be available to all users in Exact solution</h6>
       
-          <!-- Login Form -->
-          <form action ="/share_proplem" method="post">
-            <input type="text" id="name" class="fadeIn second" name="addProblem" placeholder="Problem Name">
-            <input type="text" id="brief" class="fadeIn third" name="addProblem" placeholder="problem brief">
-            <input type="text" id="details" class="fadeIn third" name="addProblem" placeholder="problem Details">
+          <!--  Form -->
+          <form action ="/share_proplem" method="POST">
+            <input type="text" id="proplem_Id" class="fadeIn second" name="proplem_Id" placeholder="Problem ID"> 
+            <input type="text" id="name" class="fadeIn second" name="title" placeholder="Problem Title">
+            <input type="text" id="brief" class="fadeIn third" name="bref" placeholder="problem brief">
+            <input type="text" id="details" class="fadeIn third" name="description" placeholder="problem Details">
 
             <div>
-            <label for="cars">Department:</label>
+            <label for="departments">Department:</label>
 
-<select name="department" id="department">
+<select name="it_department" id="department">
   <option value="development">development</option>
   <option value="security">security</option>
   <option value="infrastructure">infrastructure</option>
   
 </select>
 </div>   
-<input  id="lvl1" class="fadeIn third" name="addProblem" placeholder="level 1">
-<input  id="lvl2" class="fadeIn third" name="addProblem" placeholder="level 2">
-<input  id="lvl3" class="fadeIn third" name="addProblem" placeholder="level 3">
+<input  id="lvl1" class="fadeIn third" name="reviewer_Id" placeholder="level 1">
+<input  id="lvl2" class="fadeIn third" name="analyst_Id" placeholder="level 2">
+<input  id="lvl3" class="fadeIn third" name="finance_Id" placeholder="level 3">
 
 <div>
-  <input  id="due" class="fadeIn third" name="addProblem" placeholder="Due Date">
-  <input  id="publish" class="fadeIn third" name="addProblem" placeholder="Publish Date">
-  <input  id="reward" class="fadeIn third" name="addProblem" placeholder="Reward Amount">
+  <input  type="date" id="due" class="fadeIn third" name="due_date" placeholder="Due Date">
+  <input type="date"  id="publish" class="fadeIn third" name="publish_date" placeholder="Publish Date">
+  <input  id="reward" class="fadeIn third" name="reward_amount" placeholder="Reward Amount">
 
 </div>
 
-            <input id="submitForm" type="submit" class="fadeIn fourth" value="Submit" onclick="showAlert()">
+            <input id="submitForm" type="submit" class="fadeIn fourth" value="Submit">
          
       
        
-      
+      </form>
         </div>
       </div>
 
-      <script>
+      <!-- <script>
         function showAlert() {
     alert ("The problem is submitted");
   }
-     </script>
+     </script> -->
 </body>
 </html>
 

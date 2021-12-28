@@ -143,14 +143,14 @@ app.post('/share_proplem', async (req, res) => {
   const client = await pool.connect()
   await pool.query(
     `INSERT INTO "problem" ("proplem_Id",  "manager_Id", "title", "bref", "description", "publish_date", "due_date", "reward_amount", "it_department", "reviewer_Id", "analyst_Id" , "finance_Id" ) VALUES ($1,$2,$3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
-    [proplem_Id , manager_Id, title, bref, description, publish_date, due_date, reward_amount, it_department, reviewer_Id, analyst_Id, finance_Id],
+    [proplem_Id , 111, title, bref, description, publish_date, due_date, reward_amount, it_department, reviewer_Id, analyst_Id, finance_Id],
 
     (error, results) => {
       if (error) {
         throw error;
       }
 
-      return res.sendStatus(201);
+      return res.redirect('/problems/111/allProblems');
     }
   )
   client.release( )
