@@ -71,29 +71,29 @@ app.get("/problems/:problemID/solutions/", (req, res) => {
 ////---- post -----
 
 //post login information 
-// app.post('/login-post', async (req, res) => {
+app.post('/login-post', async (req, res) => {
   
-//   const { user_id, password } = req.body;
+  const { user_id, password } = req.body;
 
-//   const client = await pool.connect()
-//   await client.query(
-//     `INSERT INTO "users" ("user_id", "email", "password","role","name" ) VALUES ($1, $2, $3, $4, $5)`,
-//      [5556677, 555, 5555, 5555, 5555],
+  const client = await pool.connect()
+  await client.query(
+    `INSERT INTO "users" ("user_id", "email", "password","role","name" ) VALUES ($1, $2, $3, $4, $5)`,
+     [5556677, 555, 5555, 5555, 5555],
   
-//     (error, results) => {
-//       if (error) {-3
-//         throw error;
-//       }
+    (error, results) => {
+      if (error) {-3
+        throw error;
+      }
 
-//       return res.sendStatus(201);
+      return res.sendStatus(201);
    
-//     }
-//   )
+    }
+  )
   
-// client.release( )
+client.release( )
 
   
-// });
+});
 
 
 //post a problem to database
@@ -142,50 +142,50 @@ app.post('/propse_solution', async (req, res) => {
 // //score a solution 
 
 // //review solution
-// app.post('/score/stage/review', async, (req, res) => {
-//   res.send("review  the solution");
-//   const { solution_Id, total_score } = req.body;
-//   await pool.connect();
-//   await pool.query(
-//     `INSERT INTO "users" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
-//     [solution_Id, total_score],
+app.post('/score/stage/review', async (req, res) => {
 
-//     (error, results) => {
-//       if (error) {
-//         throw error;
-//       }
+  const { solution_Id, total_score } = req.body;
+  const client = await pool.connect()
+  await pool.query(
+    `INSERT INTO "score" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
+    [solution_Id, total_score],
 
-//       return res.sendStatus(201);
-//     }
-//   )
-//   res.end()
-// });
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+
+      return res.sendStatus(201);
+    }
+  )
+  client.release( )
+});
 
 
 // //review  feasibility of a solution
-// app.post('/score/stage/feasibility', async (req, res) => {
-//   res.send("Scoring feasibility of the solution");
-//   const { solution_Id, total_score } = req.body;
+app.post('/score/stage/feasibility', async (req, res) => {
+  
+  const { solution_Id, total_score } = req.body;
+  const client = await pool.connect()
+  await pool.query(
+    `INSERT INTO "score" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
+    [solution_Id, total_score],
 
-//   await pool.connect();
-//   await pool.query(
-//     `INSERT INTO "users" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
-//     [solution_Id, total_score],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
 
-//     (error, results) => {
-//       if (error) {
-//         throw error;
-//       }
+      return res.sendStatus(201);
+    }
+  )
+  client.release( )
 
-//       return res.sendStatus(201);
-//     }
-//   )
-//   res.end()
-// });
+});
 
 
 // //review costing os a solution
-// app.post('/score/stage/cost', async, (req, res) => {
+// app.post('/score/stage/cost', async (req, res) => {
 //   res.send("Scoring the cost of a solution");
 //   const { solution_Id, total_score } = req.body;
 
