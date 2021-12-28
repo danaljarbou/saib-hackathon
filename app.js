@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 
 // Add problem page 
 app.get("/problems/newProblem", (req, res) => {
-  res.send("Add your problem here");
+  res.sendFile(path.join(__dirname, 'public/addProblem.html'));
 });
 
 // Login Page 
@@ -32,13 +32,13 @@ app.get("/login", (req, res) => {
 });
 
 // Problems Admin : display the admin problems which he added 
-app.get("/problems/{userID}/allProblems", (req, res) => {
-  res.send("this is a list of all the problems u added before");
+app.get("/problems/:userID/allProblems", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/problemsAdmin.html'));
 });
 
 // solutions per problem, when he click a problem, the solutions will appear
-app.get("/problems/{problemID}/solutions", (req, res) => {
-  res.send("all solutions for the problem");
+app.get("/problems/:problemID/solutions", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/solutionsPerProblem.html'));
 });
 
 
@@ -46,27 +46,27 @@ app.get("/problems/{problemID}/solutions", (req, res) => {
 
 // problem page , has all problems
 app.get("/problems", (req, res) => {
-  res.send("Hello world!");
+  res.sendFile(path.join(__dirname, 'public/Problempage.html'));
 });
 
 // read more about one problem, has message submit your solutions
-app.get("/problems/{problemID}", (req, res) => {
-  res.send("Hello world!");
+app.get("/problems/:problemID", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/Descriptionpage.html'));
 });
 
 //review stage, relevent or not // ++ add review
-app.get("/problems/{problemID}/solutions/{solutionID}/review", (req, res) => {
-  res.send("Hello world!");
+app.get("/problems/:problemID/solutions/:solutionID/review", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/Reviewpage.html'));
 });
 
-// scoring, for feasability and cost  
-app.get("/problems/{problemID}/solutions/{solutionID}/scoring", (req, res) => {
-  res.send("Hello world!");
+// scoring, for feasability and cost 
+app.get("/problems/:problemID/solutions/:solutionID/scoring", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/Scoringpage.html'));
 });
 
 // solutions per problem, when he click a problem, the solutions will appear
-app.get("/problems/{problemID}/solutions/", (req, res) => {
-  res.send("Hello world!");
+app.get("/problems/:problemID/solutions/", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/solutionsPerProblem.html'));
 });
 
 

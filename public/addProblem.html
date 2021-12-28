@@ -6,16 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="\CSS\bootstrap.min.css" rel="stylesheet">
     <!-- Image and text -->
-    <nav class="navbar navbar-light  nav justify-content-center " style="background-color: #fee202;">
-        
-          <img src=".\Images\logo.png" height="50" style="align-content: center;">
-          <span class="navbar-text" style="align-content: center; color: #000; margin-left: 1%;" >
-            Exact Solutions
-          </span>
-        
-      </nav>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+   
+        <div class="navbar-header">
+  
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                   
+                    </button>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+          
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#"><img alt="SaibLogo"  height="45" src="https://www.saib.com.sa/sites/default/files/logo.png" id="logofpin"></a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
 
 </head>
 <body>
@@ -27,7 +45,7 @@
           <h6>by adding a problem, it will be available to all users in Exact solution</h6>
       
           <!-- Login Form -->
-          <form>
+          
             <input type="text" id="name" class="fadeIn second" name="addProblem" placeholder="Problem Name">
             <input type="text" id="brief" class="fadeIn third" name="addProblem" placeholder="problem brief">
             <input type="text" id="details" class="fadeIn third" name="addProblem" placeholder="problem Details">
@@ -46,13 +64,19 @@
 <input  id="lvl2" class="fadeIn third" name="addProblem" placeholder="level 2">
 <input  id="lvl3" class="fadeIn third" name="addProblem" placeholder="level 3">
 
-            <input type="submit" class="fadeIn fourth" value="Submit">
-          </form>
+            <input id="submitForm" type="submit" class="fadeIn fourth" value="Submit" onclick="showAlert()">
+         
       
        
       
         </div>
       </div>
+
+      <script>
+        function showAlert() {
+    alert ("The problem is submitted");
+  }
+     </script>
 </body>
 </html>
 

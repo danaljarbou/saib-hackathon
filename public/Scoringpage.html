@@ -33,7 +33,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   <li>
-                    <a href="#"><img alt="SaibLogo"  height="45" src="public\logo.png" id="logofpin"></a>
+                    <a href="#"><img alt="SaibLogo"  height="45" src="https://www.saib.com.sa/sites/default/files/logo.png" id="logofpin"></a>
                   </li>
                 </ul>
               </div>
@@ -54,10 +54,9 @@
             
             <div class="container-fostrap">
                 <div>
-                    <img src="./logo.png" class="fostrap-logo"/>
-                    <h5 class="heading">
-                       we need to get data 
-                    </h5>
+                    <img src="https://www.saib.com.sa/sites/default/files/logo.png" class="fostrap-logo"/>
+                    <h4 style="color:rgb(248, 248, 8);"> Exact <span style="color:black;font-size:20px;">solution</span> </h4>
+
 
 
                 </div>
@@ -107,10 +106,14 @@
     <label id="Costing" for="vol">Cost scoring (between 1 and 4):</label>
     <input type="range" id="vol" name="vol" min="1" max="4">
     <br/>
-    <input type="submit">
+    <input type="submit" onclick="showAlert()" >
   </form>
  
-                
+  <script>
+    function showAlert() {
+alert ("The score is submitted");
+}
+ </script>        
     </body>
 
     <style>

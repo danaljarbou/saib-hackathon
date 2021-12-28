@@ -14,16 +14,17 @@
       
           <!-- Icon -->
           <div class="fadeIn first">
-            <img src="./Images/logo.png" id="icon" alt="User Icon" />
+            <img src="https://www.saib.com.sa/sites/default/files/logo.png" id="icon" alt="SAIB" />
           </div>
       
           <!-- Login Form -->
-          <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Log In" onclick="window.location.href='problemPage.html'">
-          </form>
-      
+          
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Email">
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+            <input type="submit"  value="Log In" onclick="verifyPassword()">
+            <div><span id = "message" style="color:red"> </span></div>
+            
+          
           <!-- Remind Passowrd -->
           <div id="formFooter">
             <a class="underlineHover" href="#">Forgot Password?</a>
@@ -31,6 +32,39 @@
       
         </div>
       </div>
+
+      <script>  
+        function verifyPassword() {  
+          var pw = document.getElementById("password").value;  
+          //check empty password field  
+          if(pw == "") {  
+             document.getElementById("message").innerHTML = "**Fill the password please!";  
+             return false;  
+          }  
+           
+         //minimum password length validation  
+         else if(pw.length < 8) {  
+             document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
+             return false;  
+          }  
+          
+        //maximum length of password validation  
+         else if(pw.length > 15) {  
+             document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
+             return false;  
+          } 
+          else if(!(pw.includes("$")||pw.includes("@"))){
+             document.getElementById("message").innerHTML = "**Password should contain special character";  
+             return false;   
+          }  
+          else {  
+            window.location.href='/problems/:userID/allProblems' ; 
+          } 
+          
+         
+          }  
+          
+        </script>  
 </body>
 </html>
 
@@ -116,7 +150,7 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], input[type=reset]  {
+input[type=button], input[type=submit]  {
   background-color: #fee202;
   border: none;
   color: white;
@@ -131,26 +165,16 @@ input[type=button], input[type=submit], input[type=reset]  {
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 5px 20px 40px 20px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
   background-color: #fee202;
 }
 
-input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
-  -moz-transform: scale(0.95);
-  -webkit-transform: scale(0.95);
-  -o-transform: scale(0.95);
-  -ms-transform: scale(0.95);
-  transform: scale(0.95);
-}
 
-input[type=text] {
+
+input[type=text],[type=password] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -162,11 +186,7 @@ input[type=text] {
   margin: 5px;
   width: 80%;
   border: 2px solid #f6f6f6;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
 }
@@ -182,87 +202,6 @@ input[type=text]:placeholder {
 
 
 
-/* ANIMATIONS */
-
-/* Simple CSS3 Fade-in-down Animation */
-.fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-@-webkit-keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-/* Simple CSS3 Fade-in Animation */
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-
-.fadeIn {
-  opacity:0;
-  -webkit-animation:fadeIn ease-in 1;
-  -moz-animation:fadeIn ease-in 1;
-  animation:fadeIn ease-in 1;
-
-  -webkit-animation-fill-mode:forwards;
-  -moz-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
-
-  -webkit-animation-duration:1s;
-  -moz-animation-duration:1s;
-  animation-duration:1s;
-}
-
-.fadeIn.first {
-  -webkit-animation-delay: 0.4s;
-  -moz-animation-delay: 0.4s;
-  animation-delay: 0.4s;
-}
-
-.fadeIn.second {
-  -webkit-animation-delay: 0.6s;
-  -moz-animation-delay: 0.6s;
-  animation-delay: 0.6s;
-}
-
-.fadeIn.third {
-  -webkit-animation-delay: 0.8s;
-  -moz-animation-delay: 0.8s;
-  animation-delay: 0.8s;
-}
-
-.fadeIn.fourth {
-  -webkit-animation-delay: 1s;
-  -moz-animation-delay: 1s;
-  animation-delay: 1s;
-}
 
 /* Simple CSS3 Fade-in Animation */
 .underlineHover:after {
