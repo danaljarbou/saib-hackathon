@@ -46,27 +46,27 @@ app.get("/problems/{problemID}/solutions", (req, res) => {
 
 // problem page , has all problems
 app.get("/problems", (req, res) => {
-  res.send("Hello world!");
+  res.sendFile(path.join(__dirname, 'public\Problempage.html'));
 });
 
 // read more about one problem, has message submit your solutions
 app.get("/problems/{problemID}", (req, res) => {
-  res.send("Hello world!");
+  res.sendFile(path.join(__dirname, 'public\Descriptionpage.html'));
 });
 
 //review stage, relevent or not // ++ add review
 app.get("/problems/{problemID}/solutions/{solutionID}/review", (req, res) => {
-  res.send("Hello world!");
+  res.sendFile(path.join(__dirname, 'public\Reviewpage.html'));
 });
 
 // scoring, for feasability and cost  
 app.get("/problems/{problemID}/solutions/{solutionID}/scoring", (req, res) => {
-  res.send("Hello world!");
+  res.sendFile(path.join(__dirname, 'public\Scoringpage.html'));
 });
 
 // solutions per problem, when he click a problem, the solutions will appear
 app.get("/problems/{problemID}/solutions/", (req, res) => {
-  res.send("Hello world!");
+  res.sendFile(path.join(__dirname, 'public\solutionsPerProblem.html'));
 });
 
 
