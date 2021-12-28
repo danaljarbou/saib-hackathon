@@ -163,15 +163,16 @@ app.post('/score/stage/review', async (req, res) => {
 
 
 // //review  feasibility of a solution
-app.post('/score/stage/feasibility', async (req, res) => {
+app.post('/score/stage/feasibility/cost', async (req, res) => {
   
   const { solution_Id, total_score } = req.body;
   const client = await pool.connect()
   await pool.query(
+    //we will get the data from one page so we sum the value in HTML 
     `INSERT INTO "score" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
     [solution_Id, total_score],
-
-    (error, results) => {
+  
+     (error, results) => {
       if (error) {
         throw error;
       }
@@ -184,29 +185,7 @@ app.post('/score/stage/feasibility', async (req, res) => {
 });
 
 
-// //review costing os a solution
-// app.post('/score/stage/cost', async (req, res) => {
-//   res.send("Scoring the cost of a solution");
-//   const { solution_Id, total_score } = req.body;
-
-//   await pool.connect();
-//  await pool.query(
-//     `INSERT INTO "users" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
-//     [solution_Id, total_score],
-
-//     (error, results) => {
-//       if (error) {
-//         throw error;
-//       }
-
-//       return res.sendStatus(201);
-//     }
-//   )
-//   res.end()
-// });
-
-
-
+//
 
 // app.post("/user", async (req, res) => {
 //   const { user_id, email, password, role, name } = req.body;
