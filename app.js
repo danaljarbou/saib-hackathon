@@ -68,7 +68,7 @@ app.get("/problems/:problemID/solutions", (req, res) => {
 
 
 // problem page , has all problems
-app.get("/problems", async (req, res) => {
+app.get("/problems/viewAll", async (req, res) => {
 
   await pool.connect();
   await pool.query("SELECT * from problem", (err, results) => {
@@ -80,7 +80,7 @@ app.get("/problems", async (req, res) => {
 });
 
 // read more about one problem, has message submit your solutions
-app.get("/problems/:problemID", (req, res) => {
+app.get("/problems/problemDescription/:problemID", (req, res) => {
   res.sendFile(path.join(__dirname, 'public/Descriptionpage.html'));
 });
 
@@ -151,19 +151,19 @@ app.post('/share_proplem', async (req, res) => {
 
 //post a solution to database
 app.post('/propse_solution', async (req, res) => {
-  const { solution_Id, name, email, description, attachment, stage, problem_Id } = req.body;
+  console.log(req.body);
+  const { solution_Id, name, email, description } = req.body;
 
   const client = await pool.connect()
   await pool.query(
     `INSERT INTO "solution_proposed" ("solution_Id",  "name", "email", "description", "attachment", "stage", "problem_Id" ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-    [solution_Id, name, email, description, attachment, stage, problem_Id],
+    [solution_Id, name, email, description,'True', 'Review',1],
 
     (error, results) => {
       if (error) {
         throw error;
       }
-
-      return res.sendStatus(201);
+      return res.redirect('/problems/viewAll'); // after submitting a soultion, send the person to the page of all problems
     }
   )
   client.release( )
