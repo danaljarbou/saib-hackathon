@@ -64,10 +64,15 @@
                 </div>
                 <br/>
                 <hr size="8" width="90%" color="yellow">  
-               <br/>
-                <button id="submitForm" class="app-form-button" onclick="window.location.href='/problems/:problemID/solutions/:solutionID/scoring'">Relevant</button>
-                <button id="submitForms" class="app-form-button"> Not Relevant</button>
-                
+               <form action= "/score/stage/review" method = "post" >
+              
+                <button id="submitForm" class="app-form-button" onclick="window.location.href='/problems/:problemID/solutions/:solutionID/scoring'" value="2">Relevant</button>
+                <button id="submitForms" class="app-form-button" value="0"> Not Relevant</button>
+                <script> $("button").click(function() {
+                  var fired_button = $(this).val();
+                  var total_score =fired_button;
+              });</script>
+                </form>
                 
                 
                 
