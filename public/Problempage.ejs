@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Exact solution</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
+
+    <nav class="navbar navbar-light  nav justify-content-center " style="background-color: #eeecec;">
+
+      <img src="https://www.saib.com.sa/sites/default/files/logo.png" height="50" style="align-content: center;">
+      <span class="navbar-text" style="align-content: center; color: #000; margin-left: 1%;" >
+        Exact Solutions
+      </span>
+    
+  </nav>
+    </head>
+    <body>
+
+       
+  
+    <div class="jumbotron feature">
+    <div class="container">
+      <style>
+        h1 {text-align: center;}
+       
+     </style>
+    <h1 style="color:yellow;"> Exact <span style="color:black;font-size:20px;">solution</span> </h1>
+    <p style=text-align:center>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+           voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+           non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    </div>
+    <div class="container">
+        <div class="row">
+
+            <% if (problems) { %>
+               
+                <% for(var i=0; i<problems.length; i++) {%>
+
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Problem <%= problems[i].proplem_Id %></h5>
+                                <p class="card-text"><%= problems[i].bref %></p>
+                                <p><button type="button" onclick="window.location.href='/problems/:problemID'" style=color:yellow; class="btn btn-default" href="#">Learn more</button></p>
+                            </div>
+                        </div>
+                   </div>
+                     <% } %>
+
+              <% } else { %>
+                <p> You havn't shared any problem yet, Add Problem? </p>
+            <% } %>
+                     
+            <br/>
+            <br/>
+<div class ="text-center">
+       <button style="background-color:rgb(240, 240, 66);" onclick="window.location.href='/problems/newProblem'">Add Problem</button>
+      </div>
+      
+  
+   
+        </footer>
+   
