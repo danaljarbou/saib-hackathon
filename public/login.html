@@ -18,13 +18,12 @@
           </div>
       
           <!-- Login Form -->
-          
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Email">
-            <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-            <input type="submit"  value="Log In" onclick="verifyPassword()">
-            <div><span id = "message" style="color:red"> </span></div>
-            
-          
+          <form action="/login-post" method = "POST" >
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In" onclick="window.location.href='problemPage.html'">
+          </form>
+      
           <!-- Remind Passowrd -->
           <div id="formFooter">
             <a class="underlineHover" href="#">Forgot Password?</a>
