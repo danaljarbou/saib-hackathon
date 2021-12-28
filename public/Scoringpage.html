@@ -9,38 +9,14 @@
     <link href="../CSS/bootstrap.min.css" rel="stylesheet">
     
     <link href="\CSS\custome.css" rel="stylesheet">
+    <nav class="navbar navbar-light  nav justify-content-center " style="background-color: #eeecec;">
     
-    
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-         
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                         
-                          </button>
-              </div>
-          
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-                
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                    <a href="#"><img alt="SaibLogo"  height="45" src="https://www.saib.com.sa/sites/default/files/logo.png" id="logofpin"></a>
-                  </li>
-                </ul>
-              </div>
-              <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-          </nav>
+        <img src="https://www.saib.com.sa/sites/default/files/logo.png" height="50" style="align-content: center;">
+        <span class="navbar-text" style="align-content: center; color: #000; margin-left: 1%;" >
+          Exact Solutions
+        </span>
+      
+    </nav>
     </head>
     <body>
          
@@ -106,10 +82,14 @@
     <label id="Costing" for="vol">Cost scoring (between 1 and 4):</label>
     <input type="range" id="vol" name="vol" min="1" max="4">
     <br/>
-    <input type="submit">
+    <input type="submit" onclick="showAlert()" >
   </form>
  
-                
+  <script>
+    function showAlert() {
+alert ("The score is submitted");
+}
+ </script>        
     </body>
 
     <style>
