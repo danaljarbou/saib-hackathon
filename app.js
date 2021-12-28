@@ -65,7 +65,15 @@ app.get("/problems/:problemID/solutions", (req, res) => {
   res.sendFile(path.join(__dirname, 'public/solutionsPerProblem.html'));
 });
 
-
+app.get('/problems/:problemID/solutions/data', (req, res)=>{
+      pool.query(`Select description from solution_proposed`, (err, result)=>{
+          if(!err){
+              res.send(result.rows);
+          }
+      });
+      pool.end;
+  })
+  pool.connect();
 
 // problem page , has all problems
 app.get("/problems/viewAll", async (req, res) => {
