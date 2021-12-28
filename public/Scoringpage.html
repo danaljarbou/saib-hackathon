@@ -106,10 +106,14 @@
     <label id="Costing" for="vol">Cost scoring (between 1 and 4):</label>
     <input type="range" id="vol" name="vol" min="1" max="4">
     <br/>
-    <input type="submit">
+    <input type="submit" onclick="showAlert()" >
   </form>
  
-                
+  <script>
+    function showAlert() {
+alert ("The score is submitted");
+}
+ </script>        
     </body>
 
     <style>

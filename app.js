@@ -32,12 +32,14 @@ app.get("/login", (req, res) => {
 });
 
 // Problems Admin : display the admin problems which he added 
-app.get("/problems/{userID}/allProblems", (req, res) => {
+///problems/{userID}/allProblems
+app.get("/problems/1/allProblems", (req, res) => {
   res.sendFile(path.join(__dirname, 'public/problemsAdmin.html'));
 });
 
 // solutions per problem, when he click a problem, the solutions will appear
-app.get("/problems/{problemID}/solutions", (req, res) => {
+///problems/{problemID}/solutions
+app.get("/problems/1/solutions", (req, res) => {
   res.sendFile(path.join(__dirname, 'public/solutionsPerProblem.html'));
 });
 
@@ -46,26 +48,30 @@ app.get("/problems/{problemID}/solutions", (req, res) => {
 
 // problem page , has all problems
 app.get("/problems", (req, res) => {
-  res.send("Hello world!");
+  res.sendFile(path.join(__dirname, 'public/Problempage.html'));
 });
 
 // read more about one problem, has message submit your solutions
-app.get("/problems/{problemID}", (req, res) => {
+///problems/{problemID}
+app.get("/problems/1", (req, res) => {
   res.send("Hello world!");
 });
 
 //review stage, relevent or not // ++ add review
-app.get("/problems/{problemID}/solutions/{solutionID}/review", (req, res) => {
-  res.send("Hello world!");
+//"/problems/{problemID}/solutions/{solutionID}/review
+app.get("/problems/1/solutions/1/review", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/Reviewpage.html'));
 });
 
-// scoring, for feasability and cost  
-app.get("/problems/{problemID}/solutions/{solutionID}/scoring", (req, res) => {
-  res.send("Hello world!");
+// scoring, for feasability and cost 
+// /problems/{problemID}/solutions/{solutionID}/scoring
+app.get("/problems/1/solutions/1/scoring", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/scoringpage.html'));
 });
 
 // solutions per problem, when he click a problem, the solutions will appear
-app.get("/problems/{problemID}/solutions/", (req, res) => {
+// /problems/{problemID}/solutions/
+app.get("/problems/1/solutions/", (req, res) => {
   res.send("Hello world!");
 });
 

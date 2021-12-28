@@ -45,7 +45,7 @@
           <h6>by adding a problem, it will be available to all users in Exact solution</h6>
       
           <!-- Login Form -->
-          <form>
+          
             <input type="text" id="name" class="fadeIn second" name="addProblem" placeholder="Problem Name">
             <input type="text" id="brief" class="fadeIn third" name="addProblem" placeholder="problem brief">
             <input type="text" id="details" class="fadeIn third" name="addProblem" placeholder="problem Details">
@@ -64,13 +64,19 @@
 <input  id="lvl2" class="fadeIn third" name="addProblem" placeholder="level 2">
 <input  id="lvl3" class="fadeIn third" name="addProblem" placeholder="level 3">
 
-            <input type="submit" class="fadeIn fourth" value="Submit">
-          </form>
+            <input id="submitForm" type="submit" class="fadeIn fourth" value="Submit" onclick="showAlert()">
+         
       
        
       
         </div>
       </div>
+
+      <script>
+        function showAlert() {
+    alert ("The problem is submitted");
+  }
+     </script>
 </body>
 </html>
 
