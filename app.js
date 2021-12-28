@@ -8,8 +8,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//app.use(express.static('./public'));
-//app.use(express.static(`${__dirname}/public`));
+app.set('views', path.join(__dirname, 'public'));
+app.set('view engine', 'ejs');
+//setup public folder
+app.use(express.static('./public'));
 
 app.use(cors());
 
@@ -44,8 +46,15 @@ app.get("/problems/:problemID/solutions", (req, res) => {
 
 
 // problem page , has all problems
-app.get("/problems", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/Problempage.html'));
+app.get("/problems", async (req, res) => {
+
+  await pool.connect();
+  await pool.query("SELECT * from problem", (err, results) => {
+    //console.log( results.rows);
+    res.render('Problempage', {
+      problems: results.rows,
+    })
+   })
 });
 
 // read more about one problem, has message submit your solutions
