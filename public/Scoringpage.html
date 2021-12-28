@@ -6,15 +6,14 @@
     
     <title>Scoring page</title>
     
-    <link href="../CSS/bootstrap.min.css" rel="stylesheet">
+   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
     <link href="\CSS\custome.css" rel="stylesheet">
     <nav class="navbar navbar-light  nav justify-content-center " style="background-color: #eeecec;">
     
         <img src="https://www.saib.com.sa/sites/default/files/logo.png" height="50" style="align-content: center;">
-        <span class="navbar-text" style="align-content: center; color: #000; margin-left: 1%;" >
-          Exact Solutions
-        </span>
+       
       
     </nav>
     </head>
@@ -30,7 +29,7 @@
             
             <div class="container-fostrap">
                 <div>
-                    <img src="https://www.saib.com.sa/sites/default/files/logo.png" class="fostrap-logo"/>
+                   
                     <h4 style="color:rgb(248, 248, 8);"> Exact <span style="color:black;font-size:20px;">solution</span> </h4>
 
 
@@ -60,27 +59,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6 form-group">
-                        <label for="name">
-                            Your Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label for="email">
-                            Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                </div>
+               <br/>
                 <hr size="8" width="90%" color="yellow">  
-               
-<form action="/action_page.php">
+               <br/>
+<form >
     <label id="Feaibilty" for="vol">Feaibilty scoring (between 1 and 4):</label>
     <input type="range" id="vol" name="vol" min="1" max="4">
 <br/>
 <br/>
     <label id="Costing" for="vol">Cost scoring (between 1 and 4):</label>
     <input type="range" id="vol" name="vol" min="1" max="4">
+    <br/>
     <br/>
     <input type="submit" onclick="showAlert()" >
   </form>
