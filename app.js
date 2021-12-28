@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 
 // Add problem page 
 app.get("/problems/newProblem", (req, res) => {
-  res.send("Add your problem here");
+  res.sendFile(path.join(__dirname, 'public/addProblem.html'));
 });
 
 // Login Page 
@@ -33,12 +33,12 @@ app.get("/login", (req, res) => {
 
 // Problems Admin : display the admin problems which he added 
 app.get("/problems/{userID}/allProblems", (req, res) => {
-  res.send("this is a list of all the problems u added before");
+  res.sendFile(path.join(__dirname, 'public/problemsAdmin.html'));
 });
 
 // solutions per problem, when he click a problem, the solutions will appear
 app.get("/problems/{problemID}/solutions", (req, res) => {
-  res.send("all solutions for the problem");
+  res.sendFile(path.join(__dirname, 'public/solutionsPerProblem.html'));
 });
 
 
