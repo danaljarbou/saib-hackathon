@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="\CSS\bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Image and text -->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -44,24 +45,33 @@
         <h6>display all the solutions for the problem</h6>
     </div>
     <div class="wrapper fadeInDown">
-        <div id="formContent">
-            <button onclick="window.location.href='/problems/:problemID/solutions/:solutionID/review'">name - solution name</button> 
+        <div id="sl1">
+            <button id ="s1" onclick="window.location.href='/problems/:problemID/solutions/:solutionID/review'">name - solution name</button> 
         </div>
 
-        <div id="formContent">
-            <button onclick="window.location.href='/problems/:problemID/solutions/:solutionID/review'">name - solution name</button> 
+        <div id="sol2">
+            <button id ="s2"onclick="window.location.href='/problems/:problemID/solutions/:solutionID/review'">name - solution name</button> 
             </div>
 
-            <div id="formContent">
-                <button onclick="window.location.href='/problems/:problemID/solutions/:solutionID/review'">name - solution name</button> 
+            <div id="sol3">
+                <button id ="s3" onclick="window.location.href='/problems/:problemID/solutions/:solutionID/review'">name - solution name</button> 
                 </div>
 
-                <div id="formContent">
-                    <button onclick="window.location.href='/problems/:problemID/solutions/:solutionID/review'">name - solution name</button>  
+                <div id="sol4">
+                    <button id ="s4" onclick="window.location.href='/problems/:problemID/solutions/:solutionID/review'">name - solution name</button>  
                     </div>
 
       </div>
-
+<script>
+$(document).ready(function(){
+  $.get('/problems/:problemID/solutions/data', function(data,status){
+    console.log(data[0].description);
+    $("#s1").html(data[0].description);
+    alert(data[0].description);
+   
+  })
+})
+</script>
 </body>
 </html>
 
