@@ -39,42 +39,26 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 mb-4">
-                        <div class="card">
-                           
-          
-                            <div class="card-body">
-                                <h5 class="card-title">Problem 1</h5>
-                                <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                      nisi ut aliquip ex ea commodo consequat.
-                                </p>
-                                  
-                                <p><button type="button" onclick="window.location.href='/problems/{problemID}/solutions'" style=color:yellow; class="btn btn-default" href="#">Learn more</button></p>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card">
-                            <img class="card-img-top" src="" alt="">
-          
-                            <div class="card-body">
-                                <h5 class="card-title">Problem 2</h5>
-                                <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                  nisi ut aliquip ex ea commodo consequat.
-                                </p>
-                                <p><button type="button" onclick="window.location.href='/problems/{problemID}/solutions'" style=color:yellow; class="btn btn-default" href="#">Learn more</button></p>
-
-                            </div>
-                        </div>
-                    </div>
-                    
+                    <% if (problems) { %>
+                        <% for(var i=0; i<problems.length; i++) {%>
+        
+                            <div class="col-lg-6 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Problem <%= problems[i].proplem_Id %></h5>
+                                        <p class="card-text"><%= problems[i].bref %></p>
+                                        <p><button type="button" onclick="window.location.href='/problems/<%= problems[i].proplem_Id %>/solutions'" style=color:yellow; class="btn btn-default" href="#">View Solutions to this problem</button></p>
+                                    </div>
+                                </div>
+                           </div>
+                             <% } %>
+        
+                      <% } else { %>
+                        <p> You havn't shared any problem yet, Add Problem? </p>
+                    <% } %>
+                             
+                    <br/>
+                    <br/>
                 </div>
             </div>
             <div class ="text-center">

@@ -33,10 +33,32 @@ app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, 'public/login.html'));
 });
 
+
 // Problems Admin : display the admin problems which he added 
-app.get("/problems/:userID/allProblems", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/problemsAdmin.html'));
+app.get("/problems/:userID/allProblems", async (req, res) => {
+   await pool.connect(function(err, client, done) {
+     if (err){
+       console.log(err.message);
+     }
+    let sql = `select * from "problem" where "manager_Id" =$1`;
+    let values = [req.params.userID];
+
+    console.log(req.params.userID);
+
+
+    client.query(sql, values, function(err, result) {
+        done(); // releases connection back to the pool        
+        // Handle results
+        if (err)
+        console.log(err.message);
+        console.log(result.rows);
+        res.render('ProblemsAdmin', {
+          problems: result.rows,
+        })
+    });
 });
+})
+
 
 // solutions per problem, when he click a problem, the solutions will appear
 app.get("/problems/:problemID/solutions", (req, res) => {
