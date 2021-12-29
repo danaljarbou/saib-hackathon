@@ -77,15 +77,16 @@
              document.getElementById("message1").innerHTML = "**Fill the Email please!";  
              return false;  
           }  
+          else if(email.includes("/")||email.includes("%")||email.includes("'")||email.includes(">")||email.includes("<")){
+             document.getElementById("message1").innerHTML = "**special character is not allowed";  
+             return false;   
+          }  
             
           else if(!(email.includes("@"))){
              document.getElementById("message1").innerHTML = "**please enter correct email format";  
              return false;   
           }  
-          else if(email.includes("/")||email.includes("%")||email.includes("'")||email.includes(">")||email.includes("<")){
-             document.getElementById("message1").innerHTML = "**special character is not allowed";  
-             return false;   
-          }  
+        
           else {  
             verifyPassword(); 
           } 
