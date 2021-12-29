@@ -8,17 +8,19 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//app.use(express.static('./public'));
-//app.use(express.static(`${__dirname}/public`));
+app.set('views', path.join(__dirname, 'public'));
+app.set('view engine', 'ejs');
+//setup public folder
+app.use(express.static('./public'));
 
 app.use(cors());
 
 
 
 // Home Page 
-app.get("/", (req, res) => {
-
-  res.sendFile(path.join(__dirname, 'public/homePage.html'));
+app.get("/home", (req, res) => {
+  console.log('inside home route');
+  res.render('homePage');
 });
 
 // Add problem page 
@@ -31,25 +33,62 @@ app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, 'public/login.html'));
 });
 
+
 // Problems Admin : display the admin problems which he added 
-app.get("/problems/:userID/allProblems", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/problemsAdmin.html'));
+app.get("/problems/:userID/allProblems", async (req, res) => {
+   await pool.connect(function(err, client, done) {
+     if (err){
+       console.log(err.message);
+     }
+    let sql = `select * from "problem" where "manager_Id" =$1`;
+    let values = [req.params.userID];
+
+    console.log(req.params.userID);
+
+
+    client.query(sql, values, function(err, result) {
+        done(); // releases connection back to the pool        
+        // Handle results
+        if (err)
+        console.log(err.message);
+        console.log(result.rows);
+        res.render('ProblemsAdmin', {
+          problems: result.rows,
+        })
+    });
 });
+})
+
 
 // solutions per problem, when he click a problem, the solutions will appear
 app.get("/problems/:problemID/solutions", (req, res) => {
   res.sendFile(path.join(__dirname, 'public/solutionsPerProblem.html'));
 });
 
-
+app.get('/problems/:problemID/solutions/data', (req, res)=>{
+      pool.query(`Select description from solution_proposed`, (err, result)=>{
+          if(!err){
+              res.send(result.rows);
+          }
+      });
+      pool.end;
+  })
+  pool.connect();
 
 // problem page , has all problems
-app.get("/problems", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/Problempage.html'));
+app.get("/problems/viewAll", async (req, res) => {
+
+  await pool.connect();
+  await pool.query("SELECT * from problem", (err, results) => {
+    //console.log( results.rows);
+    res.render('Problempage', {
+      problems: results.rows,
+    })
+   })
 });
 
 // read more about one problem, has message submit your solutions
-app.get("/problems/:problemID", (req, res) => {
+app.get("/problems/problemDescription/:problemID", (req, res) => {
   res.sendFile(path.join(__dirname, 'public/Descriptionpage.html'));
 });
 
@@ -104,14 +143,14 @@ app.post('/share_proplem', async (req, res) => {
   const client = await pool.connect()
   await pool.query(
     `INSERT INTO "problem" ("proplem_Id",  "manager_Id", "title", "bref", "description", "publish_date", "due_date", "reward_amount", "it_department", "reviewer_Id", "analyst_Id" , "finance_Id" ) VALUES ($1,$2,$3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
-    [proplem_Id , manager_Id, title, bref, description, publish_date, due_date, reward_amount, it_department, reviewer_Id, analyst_Id, finance_Id],
+    [proplem_Id , 111, title, bref, description, publish_date, due_date, reward_amount, it_department, reviewer_Id, analyst_Id, finance_Id],
 
     (error, results) => {
       if (error) {
         throw error;
       }
 
-      return res.sendStatus(201);
+      return res.redirect('/problems/111/allProblems');
     }
   )
   client.release( )
@@ -120,19 +159,19 @@ app.post('/share_proplem', async (req, res) => {
 
 //post a solution to database
 app.post('/propse_solution', async (req, res) => {
-  const { solution_Id, name, email, description, attachment, stage, problem_Id } = req.body;
+  console.log(req.body);
+  const { solution_Id, name, email, description } = req.body;
 
   const client = await pool.connect()
   await pool.query(
     `INSERT INTO "solution_proposed" ("solution_Id",  "name", "email", "description", "attachment", "stage", "problem_Id" ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-    [solution_Id, name, email, description, attachment, stage, problem_Id],
+    [solution_Id, name, email, description,'True', 'Review',1],
 
     (error, results) => {
       if (error) {
         throw error;
       }
-
-      return res.sendStatus(201);
+      return res.redirect('/problems/viewAll'); // after submitting a soultion, send the person to the page of all problems
     }
   )
   client.release( )
