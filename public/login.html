@@ -19,9 +19,15 @@
       
           <!-- Login Form -->
           <form action="/login-post" method = "POST" >
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Log In" onclick="window.location.href='problemPage.html'">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Email">
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In" onclick=" verifyEmail();">
+            <div>
+              <span id = "message" style="color:red"> </span>
+            </div>
+            <div>
+              <span id = "message1" style="color:red"> </span>
+            </div>
           </form>
       
           <!-- Remind Passowrd -->
@@ -62,6 +68,33 @@
           
          
           }  
+
+          function verifyEmail(){
+
+            var email = document.getElementById("login").value;  
+          //check empty password field  
+          if(email == "") {  
+             document.getElementById("message1").innerHTML = "**Fill the Email please!";  
+             return false;  
+          }  
+          else if(email.includes("/")||email.includes("%")||email.includes("'")||email.includes(">")||email.includes("<")){
+             document.getElementById("message1").innerHTML = "**special character is not allowed";  
+             return false;   
+          }  
+            
+          else if(!(email.includes("@"))){
+             document.getElementById("message1").innerHTML = "**please enter correct email format";  
+             return false;   
+          }  
+        
+          else {  
+            verifyPassword(); 
+          } 
+          
+         
+          }  
+
+          
           
         </script>  
 </body>
