@@ -179,12 +179,12 @@ app.post('/share_proplem', async (req, res) => {
 //post a solution to database
 app.post('/propse_solution', async (req, res) => {
   console.log(req.body);
-  const { solution_Id, name, email, description } = req.body;
+  const { solution_Id, name, email, description,problem_Id } = req.body;
 
   const client = await pool.connect()
   await pool.query(
     `INSERT INTO "solution_proposed" ("solution_Id",  "name", "email", "description", "attachment", "stage", "problem_Id" ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-    [solution_Id, name, email, description,'True', 'Review',1],
+    [solution_Id, name, email, description,'True', 'Review', problem_Id],
 
     (error, results) => {
       if (error) {

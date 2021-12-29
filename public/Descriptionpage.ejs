@@ -52,8 +52,10 @@
                 <form action="/propse_solution" method="POST">
                 <div class="app-form">
                   
+                  <input type="hidden" name="problem_Id" value="<%= problem.proplem_Id %>">
+
                   <div class="app-form-group">
-                    <input class="app-form-control" placeholder="ID" name="solution_Id">
+                    <input class="app-form-control" placeholder="Solution ID" name="solution_Id">
                   </div>
 
                   <div class="app-form-group">
@@ -63,7 +65,7 @@
                     <input class="app-form-control" placeholder="Name" name="name">
                   </div>
                   <div class="app-form-group message">
-                    <input class="app-form-control" placeholder="MESSAGE" name="description">
+                    <input class="app-form-control" placeholder="Enter your exact solution" name="description">
                   </div>
 
                     <input type="file" id="myFile" name="attachment">
