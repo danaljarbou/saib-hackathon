@@ -204,7 +204,7 @@ app.post('/score/stage/review', async (req, res) => {
 
 
   
-// //review  feasibility and of a solution
+// //review  feasibility and cost of a solution
 app.post('/score/stage/feasibility/cost', async (req, res) => {
   
   const { solution_Id, total_score } = req.body;
