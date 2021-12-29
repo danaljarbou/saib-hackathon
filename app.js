@@ -88,8 +88,27 @@ app.get("/problems/viewAll", async (req, res) => {
 });
 
 // read more about one problem, has message submit your solutions
-app.get("/problems/problemDescription/:problemID", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/Descriptionpage.html'));
+app.get("/problems/problemDescription/:problemID", async (req, res) => {
+
+  await pool.connect(function(err, client, done) {
+    if (err){
+      console.log(err.message);
+    }
+   let sql = `select * from "problem" where "proplem_Id" =$1`;
+   let values = [req.params.problemID];
+    client.query(sql, values, function(err, result) {
+       done(); // releases connection back to the pool        
+       // Handle results
+       if (err)
+       console.log(err.message);
+       //console.log(result.rows);
+       res.render('Descriptionpage', {
+         problem: result.rows[0],
+       })
+   });
+});
+
+
 });
 
 //review stage, relevent or not // ++ add review
@@ -160,12 +179,12 @@ app.post('/share_proplem', async (req, res) => {
 //post a solution to database
 app.post('/propse_solution', async (req, res) => {
   console.log(req.body);
-  const { solution_Id, name, email, description } = req.body;
+  const { solution_Id, name, email, description,problem_Id } = req.body;
 
   const client = await pool.connect()
   await pool.query(
     `INSERT INTO "solution_proposed" ("solution_Id",  "name", "email", "description", "attachment", "stage", "problem_Id" ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-    [solution_Id, name, email, description,'True', 'Review',1],
+    [solution_Id, name, email, description,'True', 'Review', problem_Id],
 
     (error, results) => {
       if (error) {
@@ -181,71 +200,53 @@ app.post('/propse_solution', async (req, res) => {
 // //score a solution 
 
 // //review solution
-// app.post('/score/stage/review', async, (req, res) => {
-//   res.send("review  the solution");
-//   const { solution_Id, total_score } = req.body;
-//   await pool.connect();
-//   await pool.query(
-//     `INSERT INTO "users" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
-//     [solution_Id, total_score],
+app.post('/score/stage/review', async (req, res) => {
 
-//     (error, results) => {
-//       if (error) {
-//         throw error;
-//       }
+  const { solution_Id, total_score } = req.body;
+  const client = await pool.connect()
+  await pool.query(
+    `INSERT INTO "score" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
+    [solution_Id, total_score],
 
-//       return res.sendStatus(201);
-//     }
-//   )
-//   res.end()
-// });
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
 
-
-// //review  feasibility of a solution
-// app.post('/score/stage/feasibility', async (req, res) => {
-//   res.send("Scoring feasibility of the solution");
-//   const { solution_Id, total_score } = req.body;
-
-//   await pool.connect();
-//   await pool.query(
-//     `INSERT INTO "users" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
-//     [solution_Id, total_score],
-
-//     (error, results) => {
-//       if (error) {
-//         throw error;
-//       }
-
-//       return res.sendStatus(201);
-//     }
-//   )
-//   res.end()
-// });
-
-
-// //review costing os a solution
-// app.post('/score/stage/cost', async, (req, res) => {
-//   res.send("Scoring the cost of a solution");
-//   const { solution_Id, total_score } = req.body;
-
-//   await pool.connect();
-//  await pool.query(
-//     `INSERT INTO "users" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
-//     [solution_Id, total_score],
-
-//     (error, results) => {
-//       if (error) {
-//         throw error;
-//       }
-
-//       return res.sendStatus(201);
-//     }
-//   )
-//   res.end()
-// });
+      return res.sendStatus(201);
+    }
+  )
+  client.release( )
+});
 
 
 
+
+  
+// //review  feasibility and cost of a solution
+app.post('/score/stage/feasibility/cost', async (req, res) => {
+  
+  const { solution_Id, total_score } = req.body;
+  const client = await pool.connect()
+  await pool.query(
+    //we will get the data from one page so we sum the value in HTML 
+    `INSERT INTO "score" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
+    [solution_Id, total_score],
+  
+     (error, results) => {
+      if (error) {
+        throw error;
+      }
+
+      return res.sendStatus(201);
+    }
+  )
+  client.release( )
+
+});
+
+
+//
 
 // app.post("/user", async (req, res) => {
 //   const { user_id, email, password, role, name } = req.body;
