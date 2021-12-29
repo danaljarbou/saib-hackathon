@@ -49,7 +49,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Problem <%= problems[i].proplem_Id %></h5>
                                 <p class="card-text"><%= problems[i].bref %></p>
-                                <p><button type="button" onclick="window.location.href='/problems/:problemID'" style=color:yellow; class="btn btn-default" href="#">Learn more</button></p>
+                                <p><button type="button" onclick="window.location.href='/problems/problemDescription/<%= problems[i].proplem_Id %>'" style=color:yellow; class="btn btn-default" href="#">Learn more</button></p>
                             </div>
                         </div>
                    </div>
