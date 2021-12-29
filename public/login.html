@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+   
     
     <div class="wrapper fadeInDown">
         <div id="formContent">
@@ -18,10 +19,11 @@
           </div>
       
           <!-- Login Form -->
-          <form action="/login-post" method = "POST" >
+         
+          <form action="/login-post" method = "POST" onsubmit="return final(this);" >
             <input type="text" id="login" class="fadeIn second" name="login" placeholder="Email">
             <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Log In" onclick=" verifyEmail();">
+            <input type="submit" class="fadeIn fourth" value="Log In" onclick="verifyEmail();" >
             <div>
               <span id = "message" style="color:red"> </span>
             </div>
@@ -45,23 +47,28 @@
           if(pw == "") {  
              document.getElementById("message").innerHTML = "**Fill the password please!";  
              return false;  
+             
           }  
            
          //minimum password length validation  
          else if(pw.length < 8) {  
              document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
              return false;  
+            
           }  
           
         //maximum length of password validation  
          else if(pw.length > 15) {  
              document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
              return false;  
+             
           } 
           else if(!(pw.includes("$")||pw.includes("@"))){
              document.getElementById("message").innerHTML = "**Password should contain special character";  
-             return false;   
+             return false;  
+            
           }  
+
           else {  
             window.location.href='/problems/:userID/allProblems' ; 
           } 
@@ -93,9 +100,11 @@
           
          
           }  
-
+function final(){
+  return verifyPassword() && verifyEmail();
+}
           
-          
+console.log(final())   
         </script>  
 </body>
 </html>
