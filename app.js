@@ -18,9 +18,9 @@ app.use(cors());
 
 
 // Home Page 
-app.get("/", (req, res) => {
-
-  res.sendFile(path.join(__dirname, 'public/homePage.html'));
+app.get("/home", (req, res) => {
+  console.log('inside home route');
+  res.render('homePage');
 });
 
 // Add problem page 
