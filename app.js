@@ -129,29 +129,29 @@ app.get("/problems/:problemID/solutions/", (req, res) => {
 ////---- post -----
 
 //post login information 
-app.post('/login-post', async (req, res) => {
+// app.post('/login-post', async (req, res) => {
   
-  const { user_id, password } = req.body;
+//   const { user_id, password } = req.body;
 
-  const client = await pool.connect()
-  await client.query(
-    `INSERT INTO "users" ("user_id", "email", "password","role","name" ) VALUES ($1, $2, $3, $4, $5)`,
-     [5556677, 555, 5555, 5555, 5555],
+//   const client = await pool.connect()
+//   await client.query(
+//     `INSERT INTO "users" ("user_id", "email", "password","role","name" ) VALUES ($1, $2, $3, $4, $5)`,
+//      [5556677, 555, 5555, 5555, 5555],
   
-    (error, results) => {
-      if (error) {-3
-        throw error;
-      }
+//     (error, results) => {
+//       if (error) {-3
+//         throw error;
+//       }
 
-      return res.sendStatus(201);
+//       return res.sendStatus(201);
    
-    }
-  )
+//     }
+//   )
   
-client.release( )
+// client.release( )
 
   
-});
+// });
 
 
 //post a problem to database

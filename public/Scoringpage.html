@@ -62,16 +62,23 @@
                <br/>
                 <hr size="8" width="90%" color="yellow">  
                <br/>
-<form >
-    <label id="Feaibilty" for="vol">Feaibilty scoring (between 1 and 4):</label>
-    <input type="range" id="vol" name="vol" min="1" max="4">
+<form action="/score/stage/feasibility/cost" method="post">
+  <label id="Feaibilty" for="vol">Feaibilty scoring (between 1 and 4):</label>
+  <input type="range" id="Feaibilty" name="vol" min="1" max="4">
 <br/>
 <br/>
-    <label id="Costing" for="vol">Cost scoring (between 1 and 4):</label>
-    <input type="range" id="vol" name="vol" min="1" max="4">
-    <br/>
-    <br/>
-    <input type="submit" onclick="showAlert()" >
+  <label id="Costing" for="vol">Cost scoring (between 1 and 4):</label>
+  <input type="range" id="Cost" name="vol" min="1" max="4">
+  <br/>
+  <input type="submit" onclick="showAlert()" >
+  <script>
+    function rangeValue() {
+      var feasable = document.getElementById("Feaibilty").value;
+      var cost = document.getElementById("Cost").value;
+      var total_score = cost+feasable;
+     
+    }
+    </script>
   </form>
  
   <script>
