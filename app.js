@@ -88,8 +88,27 @@ app.get("/problems/viewAll", async (req, res) => {
 });
 
 // read more about one problem, has message submit your solutions
-app.get("/problems/problemDescription/:problemID", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/Descriptionpage.html'));
+app.get("/problems/problemDescription/:problemID", async (req, res) => {
+
+  await pool.connect(function(err, client, done) {
+    if (err){
+      console.log(err.message);
+    }
+   let sql = `select * from "problem" where "proplem_Id" =$1`;
+   let values = [req.params.problemID];
+    client.query(sql, values, function(err, result) {
+       done(); // releases connection back to the pool        
+       // Handle results
+       if (err)
+       console.log(err.message);
+       //console.log(result.rows);
+       res.render('Descriptionpage', {
+         problem: result.rows[0],
+       })
+   });
+});
+
+
 });
 
 //review stage, relevent or not // ++ add review
@@ -160,12 +179,12 @@ app.post('/share_proplem', async (req, res) => {
 //post a solution to database
 app.post('/propse_solution', async (req, res) => {
   console.log(req.body);
-  const { solution_Id, name, email, description } = req.body;
+  const { solution_Id, name, email, description,problem_Id } = req.body;
 
   const client = await pool.connect()
   await pool.query(
     `INSERT INTO "solution_proposed" ("solution_Id",  "name", "email", "description", "attachment", "stage", "problem_Id" ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-    [solution_Id, name, email, description,'True', 'Review',1],
+    [solution_Id, name, email, description,'True', 'Review', problem_Id],
 
     (error, results) => {
       if (error) {

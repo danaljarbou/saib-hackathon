@@ -43,12 +43,8 @@
                 <div class="app-title">
                   <span>Share  your</span>
                  <span > Exact <span style="color:black;font-size:20px;">solution</span> </span>
-                  <P style="font-size: 10px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-                       non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</P>
+                  <P style="font-size: 10px">
+                    <%= problem.description %></P>
                 </div>
                
               </div>
@@ -56,8 +52,10 @@
                 <form action="/propse_solution" method="POST">
                 <div class="app-form">
                   
+                  <input type="hidden" name="problem_Id" value="<%= problem.proplem_Id %>">
+
                   <div class="app-form-group">
-                    <input class="app-form-control" placeholder="ID" name="solution_Id">
+                    <input class="app-form-control" placeholder="Solution ID" name="solution_Id">
                   </div>
 
                   <div class="app-form-group">
@@ -67,7 +65,7 @@
                     <input class="app-form-control" placeholder="Name" name="name">
                   </div>
                   <div class="app-form-group message">
-                    <input class="app-form-control" placeholder="MESSAGE" name="description">
+                    <input class="app-form-control" placeholder="Enter your exact solution" name="description">
                   </div>
 
                     <input type="file" id="myFile" name="attachment">
