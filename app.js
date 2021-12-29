@@ -88,8 +88,27 @@ app.get("/problems/viewAll", async (req, res) => {
 });
 
 // read more about one problem, has message submit your solutions
-app.get("/problems/problemDescription/:problemID", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/Descriptionpage.html'));
+app.get("/problems/problemDescription/:problemID", async (req, res) => {
+
+  await pool.connect(function(err, client, done) {
+    if (err){
+      console.log(err.message);
+    }
+   let sql = `select * from "problem" where "proplem_Id" =$1`;
+   let values = [req.params.problemID];
+    client.query(sql, values, function(err, result) {
+       done(); // releases connection back to the pool        
+       // Handle results
+       if (err)
+       console.log(err.message);
+       //console.log(result.rows);
+       res.render('Descriptionpage', {
+         problem: result.rows[0],
+       })
+   });
+});
+
+
 });
 
 //review stage, relevent or not // ++ add review
