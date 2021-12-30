@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const pool = require('./db');
 const path = require('path');
+const session = require("express-session");
 const app = express();
 
 app.use(bodyParser.json());
@@ -15,7 +16,14 @@ app.use(express.static('./public'));
 
 app.use(cors());
 
-
+app.use(
+  session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
 
 // Home Page 
 app.get("/home", (req, res) => {
@@ -30,12 +38,13 @@ app.get("/problems/newProblem", (req, res) => {
 
 // Login Page 
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/login.html'));
+  res.render('login');
 });
 
 
 // Problems Admin : display the admin problems which he added 
 app.get("/problems/:userID/allProblems", async (req, res) => {
+  
    await pool.connect(function(err, client, done) {
      if (err){
        console.log(err.message);
@@ -57,7 +66,7 @@ app.get("/problems/:userID/allProblems", async (req, res) => {
         })
     });
 });
-})
+});
 
 
 // solutions per problem, when he click a problem, the solutions will appear
@@ -119,6 +128,7 @@ app.get("/problems/:problemID/solutions/:solutionID/review", (req, res) => {
 // scoring, for feasability and cost 
 app.get("/problems/:problemID/solutions/:solutionID/scoring", (req, res) => {
   res.sendFile(path.join(__dirname, 'public/Scoringpage.html'));
+ //res.render("Scoringpage")
 });
 
 // solutions per problem, when he click a problem, the solutions will appear
@@ -127,6 +137,29 @@ app.get("/problems/:problemID/solutions/", (req, res) => {
 });
 
 ////---- post -----
+
+
+app.post('/login', async (req, res) => {
+  console.log(req.body);
+  const {email , password}= req.body;
+	
+    const client = await pool.connect()
+    await  pool.query(`SELECT * FROM "users" WHERE "email" = $1 AND "password" = $2`,
+     [email, password],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      return res.redirect('/problems/111/allProblems')
+    }
+    
+    );
+     
+      client.release( )
+		});
+
+    
+    
 
 //post login information 
 // app.post('/login-post', async (req, res) => {
