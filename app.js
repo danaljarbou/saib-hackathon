@@ -3,11 +3,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const pool = require('./db');
 const path = require('path');
-const session = require("express-session");
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'ejs');
@@ -16,14 +15,6 @@ app.use(express.static('./public'));
 
 app.use(cors());
 
-app.use(
-  session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
-}));
-app.use(bodyParser.urlencoded({extended : true}));
-app.use(bodyParser.json());
 
 // Home Page 
 app.get("/home", (req, res) => {
@@ -52,15 +43,11 @@ app.get("/problems/:userID/allProblems", async (req, res) => {
     let sql = `select * from "problem" where "manager_Id" =$1`;
     let values = [req.params.userID];
 
-    console.log(req.params.userID);
-
-
     client.query(sql, values, function(err, result) {
         done(); // releases connection back to the pool        
         // Handle results
         if (err)
         console.log(err.message);
-        console.log(result.rows);
         res.render('ProblemsAdmin', {
           problems: result.rows,
         })
@@ -79,7 +66,6 @@ app.get("/problems/:problemID/solutions", async(req, res) => {
    let sql = `Select * from solution_proposed where "problem_Id" =$1`;
    let values = [req.params.problemID];
 
-   console.log(req.params.problemID);
 
 
    client.query(sql, values, function(err, result) {
@@ -208,8 +194,6 @@ app.post('/login', async (req, res) => {
     }
     
     );
-     
-      client.release( )
 		});
 
     
