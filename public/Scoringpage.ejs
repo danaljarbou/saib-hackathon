@@ -41,28 +41,23 @@
                     <div class="row">
                         <div class="col-lg-6">
                             PROBLEM 
-                            <P><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                   voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-                                   non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</P>
+                            <P><br/>
+                              <%= problemAndSolution.description %>
+                            
+                            </P>
                         </div>
                         <div class="col-lg-6">
                             SOLUTION
-                            <P><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                   voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-                                   non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</P>
+                            <P><br/>
+                              <%= problemAndSolution.description_s %>
+                            </P>
                         </div>
                     </div>
                 </div>
                <br/>
                 <hr size="8" width="90%" color="yellow">  
                <br/>
-<form action="/score/stage/feasibility/cost" method="post">
+<form action="/score/stage/feasibility/cost/<%= problemAndSolution.solution_Id %>" method="post">
   <label id="Feaibilty" for="vol">Feaibilty scoring (between 1 and 4):</label>
   <input type="range" id="Feaibilty" name="vol" min="1" max="4">
 <br/>
