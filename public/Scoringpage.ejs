@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Scoring page</title>
+    
+   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <link href="\CSS\custome.css" rel="stylesheet">
+    <nav class="navbar navbar-light  nav justify-content-center " style="background-color: #eeecec;">
+    
+        <img src="https://www.saib.com.sa/sites/default/files/logo.png" height="50" style="align-content: center;">
+       
+      
+    </nav>
+    </head>
+    <body>
+         
+   
+
+
+                        
+
+        
+        <section class="wrapper">
+            
+            <div class="container-fostrap">
+                <div>
+                   
+                    <h4 style="color:rgb(248, 248, 8);"> Exact <span style="color:black;font-size:20px;">solution</span> </h4>
+
+
+
+                </div>
+<BR/>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            PROBLEM 
+                            <P><br/>
+                              <%= problemAndSolution.description %>
+                            
+                            </P>
+                        </div>
+                        <div class="col-lg-6">
+                            SOLUTION
+                            <P><br/>
+                              <%= problemAndSolution.description_s %>
+                            </P>
+                        </div>
+                    </div>
+                </div>
+               <br/>
+                <hr size="8" width="90%" color="yellow">  
+               <br/>
+<form action="/score/stage/feasibility/cost/<%= problemAndSolution.solution_Id %>" method="post">
+  <label id="Feaibilty" for="vol">Feaibilty scoring (between 1 and 4):</label>
+  <input type="range" id="Feaibilty" name="vol" min="1" max="4">
+<br/>
+<br/>
+  <label id="Costing" for="vol">Cost scoring (between 1 and 4):</label>
+  <input type="range" id="Cost" name="vol" min="1" max="4">
+  <br/>
+  <input type="submit" onclick="showAlert()" >
+  <script>
+    function rangeValue() {
+      var feasable = document.getElementById("Feaibilty").value;
+      var cost = document.getElementById("Cost").value;
+      var total_score = cost+feasable;
+     
+    }
+    </script>
+  </form>
+ 
+  <script>
+    function showAlert() {
+alert ("The score is submitted");
+}
+ </script>        
+    </body>
+
+    <style>
+    
+    body {
+	padding-top: 0px;
+	color: #959595;
+    
+    
+    
+	}
+	
+h1, h2, h3, h4, h5, h6 {
+	color: black;
+	}
+   
+.feature {
+	background-color: yellowgreen;
+	color: greenyellow;
+	}
+	
+.article-intro {
+    margin-bottom: 50px;
+}
+
+.footer-blurb {
+    padding: 30px 0;
+    background-color: goldenrod;
+    color: black;
+}
+    
+.footer-blurb-item {
+    padding: 30px;
+    }
+ 
+.small-print {
+	background-color: #fff;
+	padding: 30px 0;
+}
+
+.wrapper {
+	display: table;
+
+	height: 100%;
+	width: 80%;
+    margin: auto;
+  }
+
+  .container-fostrap {
+	display: table-cell;
+	padding: 1em;
+	text-align: center;
+	vertical-align: middle;
+    width: 100%;
+  }
+  .fostrap-logo {
+	width: 100px;
+	margin-bottom:15px
+  }   
+
+  .app-form-group.buttons {
+    margin-bottom: 0;
+    position: absolute; bottom: 40px; right: 40px; 
+  }
+    
+    
+
+
+    </style>

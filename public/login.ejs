@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+      
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img src="https://www.saib.com.sa/sites/default/files/logo.png" id="icon" alt="SAIB" />
+          </div>
+      
+          <!-- Login Form -->
+         
+          <form action="/login" method = "POST"  >
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Email">
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In" onclick="verifyEmail();" >
+            <div>
+              <span id = "message" style="color:red"> </span>
+            </div>
+            <div>
+              <span id = "message1" style="color:red"> </span>
+            </div>
+          </form>
+      
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+          </div>
+      
+        </div>
+      </div>
+
+      <script>  
+        function verifyPassword() {  
+          var pw = document.getElementById("password").value;  
+          //check empty password field  
+          if(pw == "") {  
+             document.getElementById("message").innerHTML = "**Fill the password please!";  
+             return false;  
+             
+          }  
+           
+         //minimum password length validation  
+         else if(pw.length < 8) {  
+             document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
+             return false;  
+            
+          }  
+          
+        //maximum length of password validation  
+         else if(pw.length > 15) {  
+             document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
+             return false;  
+             
+          } 
+          else if(!(pw.includes("$")||pw.includes("@"))){
+             document.getElementById("message").innerHTML = "**Password should contain special character";  
+             return false;  
+            
+          }  
+
+          else {  
+            window.location.href='/problems/:userID/allProblems' ; 
+          } 
+          
+         
+          }  
+
+          function verifyEmail(){
+
+            var email = document.getElementById("login").value;  
+          //check empty password field  
+          if(email == "") {  
+             document.getElementById("message1").innerHTML = "**Fill the Email please!";  
+             return false;  
+          }  
+          else if(email.includes("/")||email.includes("%")||email.includes("'")||email.includes(">")||email.includes("<")){
+             document.getElementById("message1").innerHTML = "**special character is not allowed";  
+             return false;   
+          }  
+            
+          else if(!(email.includes("@"))){
+             document.getElementById("message1").innerHTML = "**please enter correct email format";  
+             return false;   
+          }  
+        
+          else {  
+            verifyPassword(); 
+          } 
+          
+         
+          }  
+function final(){
+  return verifyPassword() && verifyEmail();
+}
+          
+console.log(final())   
+        </script>  
+</body>
+</html>
+
+<Style>
+
+html {
+  background-color: #fdfdfd;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+}
+
+a {
+  color: #ecdb55;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+h2 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display:inline-block;
+  margin: 40px 8px 10px 8px; 
+  color: #cccccc;
+}
+
+
+
+/* STRUCTURE */
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+#formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 25px;
+  text-align: center;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+
+
+/* TABS */
+
+h2.inactive {
+  color: #cccccc;
+}
+
+h2.active {
+  color: #0d0d0d;
+  border-bottom: 2px solid #fee202;
+}
+
+
+
+/* FORM TYPOGRAPHY*/
+
+input[type=button], input[type=submit]  {
+  background-color: #fee202;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(233, 214, 45, 0.4);
+  box-shadow: 0 10px 30px 0 rgba(233, 214, 45, 0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  background-color: #fee202;
+}
+
+
+
+input[type=text],[type=password] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 80%;
+  border: 2px solid #f6f6f6;
+
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #fee202;
+}
+
+input[type=text]:placeholder {
+  color: #cccccc;
+}
+
+
+
+
+/* Simple CSS3 Fade-in Animation */
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #fee202;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover {
+  color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+  width: 100%;
+}
+
+
+
+/* OTHERS */
+
+*:focus {
+    outline: none;
+} 
+
+#icon {
+  width:60%;
+}
+
+
+
+    
+</Style>
