@@ -61,19 +61,31 @@ app.get("/problems/:userID/allProblems", async (req, res) => {
 
 
 // solutions per problem, when he click a problem, the solutions will appear
-app.get("/problems/:problemID/solutions", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/solutionsPerProblem.html'));
+app.get("/problems/:problemID/solutions", async(req, res) => {
+
+  await pool.connect(function(err, client, done) {
+    if (err){
+      console.log(err.message);
+    }
+   let sql = `Select * from solution_proposed where "problem_Id" =$1`;
+   let values = [req.params.problemID];
+
+   console.log(req.params.problemID);
+
+
+   client.query(sql, values, function(err, result) {
+       done(); // releases connection back to the pool        
+       // Handle results
+       if (err)
+       console.log(err.message);
+       console.log(result.rows);
+       res.render('solutionsPerProblem', {
+         solutions: result.rows,
+       })
+   });
+  });
 });
 
-app.get('/problems/:problemID/solutions/data', (req, res)=>{
-      pool.query(`Select description from solution_proposed`, (err, result)=>{
-          if(!err){
-              res.send(result.rows);
-          }
-      });
-      pool.end;
-  })
-  pool.connect();
 
 // problem page , has all problems
 app.get("/problems/viewAll", async (req, res) => {
@@ -112,13 +124,56 @@ app.get("/problems/problemDescription/:problemID", async (req, res) => {
 });
 
 //review stage, relevent or not // ++ add review
-app.get("/problems/:problemID/solutions/:solutionID/review", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/Reviewpage.html'));
+app.get("/problems/:problemID/solutions/:solutionID/review", async (req, res) => {
+  //res.sendFile(path.join(__dirname, 'public/Reviewpage.html'));
+
+  //Select * from problem  Inner JOIN solution_proposed ON problem."proplem_Id"= solution_proposed."problem_Id"
+  await pool.connect(function(err, client, done) {
+    if (err){
+      console.log(err.message);
+    }
+   let sql = `Select * from problem  Inner JOIN solution_proposed ON problem."proplem_Id"= solution_proposed."problem_Id" where "solution_Id" =$1`;
+   let values = [req.params.solutionID];
+
+
+   client.query(sql, values, function(err, result) {
+       done(); // releases connection back to the pool        
+       // Handle results
+       if (err)
+       console.log(err.message);
+       console.log(result.rows);
+       res.render('Reviewpage', {
+         problemAndSolution: result.rows[0],
+       })
+   });
+  });
+
+
 });
 
 // scoring, for feasability and cost 
-app.get("/problems/:problemID/solutions/:solutionID/scoring", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/Scoringpage.html'));
+app.get("/solutions/:solutionID/scoring", async (req, res) => {
+
+  await pool.connect(function(err, client, done) {
+    if (err){
+      console.log(err.message);
+    }
+   let sql = `Select * from problem  Inner JOIN solution_proposed ON problem."proplem_Id"= solution_proposed."problem_Id" where "solution_Id" =$1`;
+   let values = [req.params.solutionID];
+
+
+   client.query(sql, values, function(err, result) {
+       done(); // releases connection back to the pool        
+       // Handle results
+       if (err)
+       console.log(err.message);
+       console.log(result.rows);
+       res.render('Scoringpage', {
+         problemAndSolution: result.rows[0],
+       })
+   });
+  });
+
 });
 
 // solutions per problem, when he click a problem, the solutions will appear
@@ -155,6 +210,7 @@ app.get("/problems/:problemID/solutions/", (req, res) => {
 
 
 //post a problem to database
+// Edit Manager problem
 app.post('/share_proplem', async (req, res) => {
   
   const { proplem_Id, manager_Id, title, bref, description, publish_date, due_date, reward_amount, it_department, reviewer_Id, analyst_Id, finance_Id } = req.body;
@@ -183,7 +239,7 @@ app.post('/propse_solution', async (req, res) => {
 
   const client = await pool.connect()
   await pool.query(
-    `INSERT INTO "solution_proposed" ("solution_Id",  "name", "email", "description", "attachment", "stage", "problem_Id" ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+    `INSERT INTO "solution_proposed" ("solution_Id",  "name", "email", "description_s", "attachment", "stage", "problem_Id" ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
     [solution_Id, name, email, description,'True', 'Review', problem_Id],
 
     (error, results) => {
@@ -200,20 +256,21 @@ app.post('/propse_solution', async (req, res) => {
 // //score a solution 
 
 // //review solution
-app.post('/score/stage/review', async (req, res) => {
+app.post('/score/stage/review/:solutionID', async (req, res) => {
 
-  const { solution_Id, total_score } = req.body;
+  const {total_score } = req.body;
+  const {solutionID} = req.params;
   const client = await pool.connect()
   await pool.query(
     `INSERT INTO "score" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
-    [solution_Id, total_score],
+    [solutionID, total_score],
 
     (error, results) => {
       if (error) {
         throw error;
       }
 
-      return res.sendStatus(201);
+      return res.redirect(`/solutions/${solutionID}/scoring`);
     }
   )
   client.release( )
@@ -224,24 +281,27 @@ app.post('/score/stage/review', async (req, res) => {
 
   
 // //review  feasibility and cost of a solution
-app.post('/score/stage/feasibility/cost', async (req, res) => {
+app.post('/score/stage/feasibility/cost/:solutionID', async (req, res) => {
   
-  const { solution_Id, total_score } = req.body;
-  const client = await pool.connect()
-  await pool.query(
-    //we will get the data from one page so we sum the value in HTML 
-    `INSERT INTO "score" ("solution_Id",  "total_score" ) VALUES ($1, $2)`,
-    [solution_Id, total_score],
-  
-     (error, results) => {
-      if (error) {
-        throw error;
-      }
+  const { total_score } = req.body;
+  const { solutionID } = req.params;
 
-      return res.sendStatus(201);
+  await pool.connect(function(err, client, done) {
+    if (err){
+      console.log(err.message);
     }
-  )
-  client.release( )
+   let sql = `Update score set total_score=$1 where "solution_Id" =$2`;
+   let values = [total_score, solutionID];
+
+
+   client.query(sql, values, function(err, result) {
+       done(); // releases connection back to the pool        
+       // Handle results
+       if (err)
+       console.log(err.message);
+       res.redirect('/problems/111/allProblems')
+   });
+  });
 
 });
 

@@ -44,36 +44,33 @@
                     <div class="row">
                         <div class="col-lg-6">
                             PROBLEM 
-                            <P><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                   voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-                                   non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</P>
+                            <P><br/>
+                                
+                                <%= problemAndSolution.description %>
+                               </P>
                         </div>
                         <div class="col-lg-6">
                             SOLUTION
-                            <P><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                   voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-                                   non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</P>
+                            <P><br/>
+                                
+                                <%= problemAndSolution.description_s %>
+                                </P>
                         </div>
                     </div>
                 </div>
                 <br/>
                 <hr size="8" width="90%" color="yellow">  
-               <form action= "/score/stage/review" method = "post" >
-              
-                <button id="submitForm" class="app-form-button" onclick="window.location.href='/problems/:problemID/solutions/:solutionID/scoring'" value="2">Relevant</button>
+               <form action= "/score/stage/review/<%= problemAndSolution.solution_Id %>" method = "post"  >
+                <input type="hidden" value="0" id="total_score" name="total_score">
+                <button id="submitForm" class="app-form-button" value="2">Relevant</button>
                 <button id="submitForms" class="app-form-button" value="0"> Not Relevant</button>
                 <script> $("button").click(function() {
                   var fired_button = $(this).val();
-                  var total_score =fired_button;
+                  $('#total_score').val(fired_button);
+                  console.log(total_score);
+                  return true;
               });</script>
                 </form>
-                
                 
                 
                 <script>

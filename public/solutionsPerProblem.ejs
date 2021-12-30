@@ -28,10 +28,28 @@
     </div>
     <div id="master" class="wrapper fadeInDown">
      
+      <% if (solutions) { %>
+               
+        <% for(var i=0; i<solutions.length; i++) {%>
+
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Solution <%= solutions[i].solution_Id %></h5>
+                        <p class="card-text"><%= solutions[i].description %></p>
+                        <p><button type="button" onclick="window.location.href='/problems/<%= solutions[i].problem_Id %>/solutions/<%= solutions[i].solution_Id %>/review'" style=color:yellow; class="btn btn-default" href="#">Read This Solution</button></p>
+                    </div>
+                </div>
+           </div>
+             <% } %>
+
+      <% } else { %>
+        <p> This Problem has not recived any solution yet. </p>
+    <% } %>
 
               
       </div>
-<script>
+<!-- <script>
  
   $(document).ready(function(){
   $.get('/problems/:problemID/solutions/data', function(data,status){
@@ -54,7 +72,7 @@
    
   })
 })
-</script>
+</script> -->
 </body>
 </html>
 
